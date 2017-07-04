@@ -1,5 +1,7 @@
 package antra_paskaita;
 
+import java.util.Scanner;
+
 /**
  * Created by CodeAcademy on 2017.07.04.
  */
@@ -90,6 +92,14 @@ public class Main {
             check = true;
         }
         System.out.println(check);
+
+        //Operators in inline
+        Scanner scanner = new Scanner(System.in);
+        int value = Integer.parseInt(scanner.nextLine());
+        String charValue = value >= 9 ? "A" : value >= 7 && value <= 8 ? "B" : value >= 5 && value <=6 ? "C" : value <= 4 ? "D" : "Unknown value";
+        System.out.println(charValue);
+
+
     }
 
 }
