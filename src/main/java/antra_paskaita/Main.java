@@ -1,5 +1,6 @@
 package antra_paskaita;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        forLoopContinueExample();
+        whileAlgorithm();
     }
 
     public static void sumAlgorithm() {
@@ -230,5 +231,31 @@ public class Main {
             }
             System.out.println();
         }
+    }
+
+    public static void forEachSecondExample() {
+        //eternal cycle
+        for (; ; ) {
+            System.out.println();
+        }
+    }
+
+    public static void whileAlgorithm() {
+        String history = "";
+        String inputText = JOptionPane.showInputDialog("Input text");
+/*
+        while (!inputText.equals("quit")) {
+            inputText = JOptionPane.showInputDialog("Input text");
+            history += inputText;
+            JOptionPane.showMessageDialog(null, history);
+        }
+*/
+        do {
+            inputText = JOptionPane.showInputDialog("Input text");
+            history += inputText;
+            JOptionPane.showMessageDialog(null, history);
+
+        } while (!inputText.equals("quit"));
+
     }
 }
