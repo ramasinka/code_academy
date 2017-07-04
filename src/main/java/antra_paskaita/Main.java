@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        forEachExample();
+        arrayExamples();
     }
 
     public static void sumAlgorithm() {
@@ -198,4 +198,15 @@ public class Main {
         }
     }
 
+    public static void arrayExamples() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (i % 2 == 0 && j % 2 == 0 || i == j) {
+                    System.out.print(" " + i + "" + j);
+                }
+                continue;
+            }
+            System.out.println();
+        }
+    }
 }
