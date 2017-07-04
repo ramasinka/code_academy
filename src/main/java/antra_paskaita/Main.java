@@ -10,7 +10,11 @@ public class Main {
 //        minusAlgorithm();
 //        sumAlgorithm();
 //        shiftBinaryAlgorithm();
-        logicalAlgorithmOperators();
+//        logicalAlgorithmOperators();
+//        switchAlgorithm();
+//        switchExample();
+//        forLoopAlgorithm();
+        forLoopExample();
     }
 
     public static void sumAlgorithm() {
@@ -93,13 +97,65 @@ public class Main {
         }
         System.out.println(check);
 
-        //Operators in inline
+        //Operators inline
         Scanner scanner = new Scanner(System.in);
         int value = Integer.parseInt(scanner.nextLine());
-        String charValue = value >= 9 ? "A" : value >= 7 && value <= 8 ? "B" : value >= 5 && value <=6 ? "C" : value <= 4 ? "D" : "Unknown value";
+        String charValue = value >= 9 ? "A" : value >= 7 && value <= 8 ? "B" : value >= 5 && value <= 6 ? "C" : value <= 4 ? "D" : "Unknown value";
         System.out.println(charValue);
-
-
     }
 
+    public static void switchAlgorithm() {
+        Scanner scanner = new Scanner(System.in);
+        int value = Integer.parseInt(scanner.nextLine());
+        switch (value) {
+            case 1:
+                System.out.println(value);
+                break;
+            case 2:
+                System.out.println(value);
+                break;
+            case 10:
+                System.out.println(value);
+                break;
+        }
+    }
+
+    public static void switchExample() {
+        for (int i = -1; i < 3; i++) {
+            switch (i) {
+                case 0:
+                    break;
+                case 1:
+                    System.out.println("one");
+                case 2:
+                    System.out.println("two");
+                case 3:
+                    System.out.println("three");
+                default:
+                    System.out.println("default value");
+            }
+        }
+        System.out.println("done");
+    }
+
+    public static void forLoopAlgorithm() {
+        Scanner scanner = new Scanner(System.in);
+        String inputText = scanner.nextLine();
+
+        int textLength = inputText.length();
+        for (int i = 1; i <= textLength; i++) {
+            char reversedChar = inputText.charAt(textLength - i);
+            System.out.println(reversedChar);
+        }
+    }
+
+    public static void forLoopExample() {
+        Scanner scanner = new Scanner(System.in);
+        String inputText = scanner.nextLine();
+        char[] array = inputText.toCharArray();
+        for (int i = 0, y = array.length ; i < (array.length) / 2; i++, y--) {
+                System.out.print(inputText.substring(i,y));
+                System.out.println();
+        }
+    }
 }
