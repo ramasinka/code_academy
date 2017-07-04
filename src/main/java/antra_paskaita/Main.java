@@ -7,14 +7,7 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-//        minusAlgorithm();
-//        sumAlgorithm();
-//        shiftBinaryAlgorithm();
-//        logicalAlgorithmOperators();
-//        switchAlgorithm();
-//        switchExample();
-//        forLoopAlgorithm();
-        forLoopExample();
+        forEachExample();
     }
 
     public static void sumAlgorithm() {
@@ -153,9 +146,56 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String inputText = scanner.nextLine();
         char[] array = inputText.toCharArray();
-        for (int i = 0, y = array.length ; i < (array.length) / 2; i++, y--) {
-                System.out.print(inputText.substring(i,y));
-                System.out.println();
+        for (int i = 0, y = array.length; i < (array.length) / 2; i++, y--) {
+            System.out.print(inputText.substring(i, y));
+            System.out.println();
         }
     }
+
+    public static void forLoopSecondExample() {
+        for (int i = 1; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.print(" " + ((i * j / 10 == 0) ? "0" + i * j : i * j));
+            }
+            System.out.println();
+        }
+    }
+
+    public static void forEachAlgorithm() {
+        int[] array = new int[30];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (int) (Math.random() * 10);
+        }
+        for (int arrayValue : array) {
+            if (arrayValue == 2) {
+                System.out.println("correct value");
+            }
+        }
+    }
+
+    public static void forEachExample() {
+
+        String[] nameArray = new String[1000];
+        for (int j = 0; j < 1000; j++) {
+            String name = "";
+            char[] bytes = new char[10];
+            for (int i = 0; i < 10; i++) {
+                int randomChar = 97 + (int) (Math.random() * 26);
+                bytes[i] = (char) randomChar;
+                name = String.copyValueOf(bytes);
+            }
+            nameArray[j] = name;
+        }
+        for (int i = 97; i <= 122; i++) {
+            char alphabetChar = (char) i;
+            System.out.println("first symbol" + alphabetChar);
+            for (String nameValue : nameArray) {
+                if (nameValue.charAt(0) == alphabetChar) {
+                    System.out.print(nameValue + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
 }
