@@ -17,5 +17,8 @@ public class Main {
         students.add(new Student(5,5,"test5"));
 
         System.out.println("Students: " + students);
+        System.out.println(students.get(0));
+        Student firstStudent = students.get(0);
+        System.out.println("id: " + firstStudent.getId() + " name: " + firstStudent.getName() + " code: " + firstStudent.getCode());
     }
 }
