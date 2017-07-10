@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="co3" />
-        <module name="co4" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

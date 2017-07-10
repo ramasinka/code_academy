@@ -1,4 +1,4 @@
-package antra_paskaita;
+package algorithm;
 
 import javax.swing.*;
 import java.util.Scanner;
