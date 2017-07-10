@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../co3/co3.iml" filepath="$PROJECT_DIR$/../co3/co3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../co4/src/main/main1.iml" filepath="$PROJECT_DIR$/../co4/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/codeacademy.iml" filepath="$PROJECT_DIR$/.idea/codeacademy.iml" />
     </modules>
   </component>
 </project>
