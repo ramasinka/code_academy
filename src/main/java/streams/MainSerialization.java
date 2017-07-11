@@ -1,6 +1,7 @@
 package streams;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by CodeAcademy on 2017.07.11.
@@ -24,9 +25,6 @@ public class MainSerialization {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("C:\\Users\\CodeAcademy\\IdeaProjects\\codeacademy\\src\\main\\java\\streams\\SERIALIZABLEDOBJECT.txt"));
             personSerializable = (PersonSerializable) objectInputStream.readObject();
             objectInputStream.close();
-            return personSerializable;
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -1,9 +1,11 @@
-package streams;
+package collections;
+
+import java.util.Comparator;
 
 /**
  * Created by CodeAcademy on 2017.07.11.
  */
-public class PersonModel {
+public class Person {
 
     private int id;
     private String first_name;
@@ -72,5 +74,11 @@ public class PersonModel {
         this.ip_address = ip_address;
     }
 
+    Comparator<String> defaultComparator = new Comparator<String>() {
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.compareTo(o2);
+        }
+    };
 
 }
