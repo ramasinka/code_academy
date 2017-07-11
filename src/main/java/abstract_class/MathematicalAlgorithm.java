@@ -5,9 +5,9 @@ package abstract_class;
  */
 public abstract class MathematicalAlgorithm {
 
-     abstract void sum(int x, int y);
+     abstract int sum(int x, int y);
 
-     abstract void calculateMax(int x, int y, int z);
+     abstract int calculateMax(int x, int y, int z);
 
-     abstract void calculateAverage(int... args);
+     abstract double calculateAverage(int... args);
 }
