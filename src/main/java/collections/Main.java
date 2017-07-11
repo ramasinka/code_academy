@@ -9,7 +9,9 @@ public class Main {
     public static void main(String[] args) {
         PersonService personService = new PersonService();
         List<Person> personData = personService.getPersonData();
-        System.out.println(personService.sortByGender(personData, "Female"));
+       /* System.out.println(personService.sortByGender(personData, "Female"));
         System.out.println(personService.getPersonEmails(personData));
+        System.out.println(personService.addPersonToMap(personData));*/
+        System.out.println(personService.getPersonDataById(100, personData));
     }
 }

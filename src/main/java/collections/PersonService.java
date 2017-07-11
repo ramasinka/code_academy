@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by CodeAcademy on 2017.07.11.
@@ -65,5 +63,30 @@ public class PersonService {
                 iterator.remove();
             }
         }
+    }
+
+    public Map<Integer, Person> addPersonToMap(List<Person> personList) {
+        Map<Integer, Person> map = new HashMap<>();
+        int i = 1;
+        for (Person person : personList) {
+            map.put(i, person);
+            i++;
+        }
+        return map;
+    }
+
+    public Person getPersonDataById(int id, List<Person> list) {
+        Map<Integer, Person> personMap = new HashMap<>();
+        for (Person person : list) {
+            personMap.put(person.getId(), person);
+        }
+        Person person = null;
+
+        for (Map.Entry<Integer, Person> persons : personMap.entrySet()) {
+            if (persons.getKey() == id) {
+                person = personMap.get(id);
+            }
+        }
+        return person;
     }
 }
