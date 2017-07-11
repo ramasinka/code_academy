@@ -1,5 +1,8 @@
 package streams;
 
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,7 +17,29 @@ public class ReadFile {
     public static void main(String[] args) {
         ReadFile rf = new ReadFile();
         List<PersonModel> personData = rf.getPersons();
-        System.out.println(personData);
+        displayPersonData(personData);
+    }
+
+    private static void displayPersonData(List<PersonModel> personData) {
+        for (PersonModel person : personData) {
+            String[] columns = {"id", "firstName", "lastName", "email", "gender", "ipAddress"};
+            DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+            Object[][] data = new String[][]{
+                    {String.valueOf(person.getId())},
+                    {person.getFirst_name()},
+                    {person.getLast_name()},
+                    {person.getEmail()},
+                    {person.getGender()},
+                    {person.getIp_address()}
+
+
+            };
+/*
+            JTable table = new JTable(tableModel);
+            tableModel.addRow(data);
+            JFrame jFrame = new JFrame();
+*/
+        }
     }
 
     private List<PersonModel> getPersons() {
