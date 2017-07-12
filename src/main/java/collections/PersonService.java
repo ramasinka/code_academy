@@ -76,10 +76,8 @@ public class PersonService {
     }
 
     public Person getPersonDataById(int id, List<Person> list) {
-        Map<Integer, Person> personMap = new HashMap<>();
-        for (Person person : list) {
-            personMap.put(person.getId(), person);
-        }
+        Map<Integer, Person> personMap = addPersonToMap(list);
+
         Person person = null;
 
         for (Map.Entry<Integer, Person> persons : personMap.entrySet()) {
