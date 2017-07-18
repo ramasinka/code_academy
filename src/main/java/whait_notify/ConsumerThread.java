@@ -1,30 +1,36 @@
 package whait_notify;
 
-import java.util.List;
-
 /**
  * Created by CodeAcademy on 2017.07.18.
  */
 public class ConsumerThread implements Runnable {
-    List<Item> itemList;
+    private Store store;
 
-    public ConsumerThread(List<Item> itemList) {
-        this.itemList = itemList;
+    public ConsumerThread(Store store) {
+        this.store = store;
     }
 
     @Override
     public void run() {
-        try {
-            Thread.sleep(1000);
-            for (int i = 0; i < itemList.size(); i++) {
-                buy(itemList.get(i));
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+        synchronized (store) {
+            try {
+                for (int i = 0; i < store.getItemList().size(); i++) {
+                    int randomItemNumber = (int) ((Math.random() * store.getItemList().size()));
+                    Item boughtItem = store.getItemList().get(randomItemNumber);
+                    store.remove(boughtItem);
+                    store.addBoughtItems(boughtItem);
+                    System.out.println("Current List" + store.getItemList());
+                    System.out.println("Bought item" + boughtItem);
+                    Thread.sleep(2000);
+                }
 
-    private void buy(Item item) {
-        itemList.remove(item);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (store.getItemList().size() == 3) {
+                store.notify();
+                System.out.println("Sold out. Left items: " + store.getItemList());
+            }
+        }
     }
 }
