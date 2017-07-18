@@ -4,15 +4,17 @@ import streams.PersonModel;
 
 import java.util.Map;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Logger;
 
 /**
  * Created by CodeAcademy on 2017.07.17.
  */
-public class ThreadExample implements Runnable {
+public class SemaphoreThread implements Runnable {
     Map<Integer, PersonModel> map;
-    static Semaphore semaphore = new Semaphore(2);
+    static Semaphore semaphore = new Semaphore(4);
+    private final static Logger LOGGER = Logger.getLogger(SemaphoreThread.class.getName());
 
-    public ThreadExample(Map<Integer, PersonModel> map) {
+    public SemaphoreThread(Map<Integer, PersonModel> map) {
         this.map = map;
     }
 
@@ -21,12 +23,15 @@ public class ThreadExample implements Runnable {
         try {
             semaphore.acquire();
             for (Map.Entry<Integer, PersonModel> p : map.entrySet()) {
-                System.out.println("ID: " + p.getKey() + "VALUE" + p.getValue());
+//                System.out.println(Thread.currentThread().getName() + "ID: " + p.getKey() + "VALUE" + p.getValue());
                 Thread.sleep(100);
+                LOGGER.info(" Thread running: " + Thread.currentThread().getName());
             }
         } catch (
                 InterruptedException e) {
             e.printStackTrace();
+        }finally {
+            semaphore.release();
         }
     }
 }
