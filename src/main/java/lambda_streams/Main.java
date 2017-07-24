@@ -2,6 +2,7 @@ package lambda_streams;
 
 import lambda_streams.data.ChangedPerson;
 import lambda_streams.data.Person;
+import lambda_streams.data.User;
 import lambda_streams.file_service.FileReaderService;
 
 import java.io.BufferedReader;
@@ -19,6 +20,154 @@ import java.util.stream.Stream;
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
+        List<String> linesList = getListLines();
+        List<User> userList = getUserList();
+
+        List<User> collectUsers = linesList
+                .stream()
+                .map(string -> {
+                    String[] split = string.split(",");
+                    User user = new User();
+                    for (int i = 0; i < split.length; i++) {
+                        user.setId(Integer.parseInt(split[0]));
+                        user.setFirst_name(split[1]);
+                        user.setEmail(split[2]);
+                        user.setGender(split[3]);
+                        user.setJob_title(split[4]);
+                        user.setBonus(Double.parseDouble(split[5]));
+                        user.setSalary(Integer.parseInt(split[6]));
+                    }
+                    return user;
+                })
+                .collect(Collectors.toList());
+
+        System.out.println("User List from string list: " + collectUsers);
+
+        Map<Integer, User> userMap = userList
+                .stream()
+                .filter(user -> {
+                    int salary = 9900;
+                    return user.getGender().equals("Male") && user.getSalary() > salary;
+                })
+                .collect(Collectors.toMap(User::getId, user -> user));
+
+        System.out.println("User map from users list: " + userMap);
+
+        long countMaleUsers = userMap
+                .values()
+                .stream()
+                .filter(user -> user.getGender().equals("Male"))
+                .count();
+
+        System.out.println("Count Male Users: " + countMaleUsers);
+
+        List<User> listUsersById = userMap
+                .values()
+                .stream()
+                .filter(user -> user.getId() <= 719)
+                .collect(Collectors.toList());
+
+        System.out.println("List users id less then 719: " + listUsersById);
+
+        User userMinSalary = userMap
+                .values()
+                .stream()
+                .min((o1, o2) -> Double.compare(o1.getSalary(), o2.getSalary()))
+                .get();
+
+        System.out.println("User with max salary: " + userMinSalary);
+
+    }
+
+    private static List<User> getUserList() {
+        String fileName = "src\\main\\java\\lambda_streams\\resource\\DATA.csv";
+        Path path = Paths.get(fileName);
+        List<User> userList = new ArrayList<>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(Files.newBufferedReader(path));
+            Stream<String> stringStream = bufferedReader.lines();
+
+            stringStream
+                    .forEach(s -> {
+                        String[] split = s.split(",");
+                        User user = new User(Integer.parseInt(split[0]),
+                                split[1], split[2], split[3], split[4], Double.parseDouble(split[5]), Integer.parseInt(split[6]));
+                        userList.add(user);
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+    private static List<String> getListLines() {
+        String fileName = "src\\main\\java\\lambda_streams\\resource\\DATA.csv";
+        Path path = Paths.get(fileName);
+        List<String> dataList = new ArrayList<>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(Files.newBufferedReader(path));
+            Stream<String> lines = bufferedReader.lines();
+            lines.forEach(s -> {
+                dataList.add(s);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
+    private static void calculateBonusSalaryExample() {
+        String fileName = "src\\main\\java\\lambda_streams\\resource\\DATA.csv";
+        Path path = Paths.get(fileName);
+        Map<Integer, User> userMap = getUserDataFromFile(path);
+        List<Double> bonusSalary = new ArrayList<>();
+        userMap
+                .forEach((integer, user) -> {
+                    bonusSalary.add(user.getBonus() * user.getSalary());
+                });
+
+        int skipValue = 990;
+        int salaryWithBonus = 50000;
+
+        List<Double> sortedBonusSalary = bonusSalary
+                .stream()
+                .skip(skipValue)
+                .filter(aDouble -> aDouble >= salaryWithBonus)
+                .collect(Collectors.toList());
+
+        /*Object[] objects = sortedBonusSalary.stream().toArray();
+        for (Object o : objects) {
+            System.out.println(o);
+        }*/
+
+        Double aDouble = sortedBonusSalary
+                .stream()
+                .findFirst()
+                .get();
+    }
+
+    private static Map<Integer, User> getUserDataFromFile(Path path) {
+        Map<Integer, User> userMap = new HashMap<>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(Files.newBufferedReader(path));
+            Stream<String> stringStream = bufferedReader.lines();
+
+            stringStream
+                    .forEach(s -> {
+                        String[] split = s.split(",");
+                        for (int i = 0; i < split.length; i++) {
+                            User user = new User(Integer.parseInt(split[0]),
+                                    split[1], split[2], split[3], split[4], Double.parseDouble(split[5]), Integer.parseInt(split[6]));
+                            userMap.put(Integer.parseInt(split[0]), user);
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userMap;
+    }
+
+    private static void filterListExample() {
         List<ChangedPerson> nameList = new ArrayList<>();
         nameList = readFileWithBufferedReaderAndCollectToStream()
                 .values()
